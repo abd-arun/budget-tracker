@@ -9,10 +9,10 @@ const ExpenseListComponent = ({ expenses, deleteExpense }) => {
         <p>No expenses added yet!</p>
       ) : (
         expenses.map((expense) => (
-          <div className="expense-item" key={expense.id}>
+          <div className="expense-item" key={expense._id}>
             <span>{expense.title}</span>
-            <span>₹{expense.amount.toFixed(2)}</span>
-            <button onClick={() => deleteExpense(expense.id)}>Delete</button>
+            <span className="expense-price">₹{expense.amount.toFixed(2)}</span>
+            <button onClick={() => deleteExpense(expense._id)}>Delete</button>
           </div>
         ))
       )}

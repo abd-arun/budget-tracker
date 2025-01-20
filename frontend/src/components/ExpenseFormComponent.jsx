@@ -6,37 +6,33 @@ const ExpenseFormComponent = ({ fetchExpenses }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleAddExpense = async (e) => {
     e.preventDefault();
-    if (title.trim() === "" || amount.trim() === "") {
-      alert("Please fill out both fields!");
-      return;
-    }
-
     try {
-      const newExpense = { title, amount: parseFloat(amount) };
-      await axios.post("http://localhost:5000/api/expenses", newExpense);
-      fetchExpenses(); // Fetch updated expenses after adding
-      setTitle("");
+      await axios.post("http://localhost:5000/api/expenses", { title, amount });
+      setTitle(""); // Clear the form
       setAmount("");
+      fetchExpenses(); // Fetch updated expenses
     } catch (error) {
       console.error("Error adding expense:", error);
     }
   };
 
   return (
-    <form className="expense-form" onSubmit={handleSubmit}>
+    <form className="expense-form" onSubmit={handleAddExpense}>
       <input
         type="text"
         placeholder="Expense Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        required
       />
       <input
         type="number"
-        placeholder="Amount (₹)"
+        placeholder="Amount"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
+        required
       />
       <button type="submit">Add Expense</button>
     </form>

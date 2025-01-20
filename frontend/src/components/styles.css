@@ -84,4 +84,8 @@ body {
   .expense-item button:hover {
     background-color: #cc0000;
   }
+  .expense-item .expense-price {
+    text-align: right; /* Aligns price to the right */
+    width: 80px; /* Fixed width ensures alignment consistency */
+  }
   
